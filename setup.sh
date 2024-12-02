@@ -8,13 +8,20 @@ prompt_user() {
   echo "$result"
 }
 
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-# Ensure nvm is loaded
+# Install nvm if not already installed
+if [ ! -d "$HOME/.nvm" ]; then
+  echo "nvm not found. Installing nvm..."
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+else
+  echo "nvm is already installed."
+fi
+
+# Load nvm into the shell
 export NVM_DIR="$HOME/.nvm"
 if [ -s "$NVM_DIR/nvm.sh" ]; then
   . "$NVM_DIR/nvm.sh"  # Load nvm
 else
-  echo "nvm is not installed. Please install it and try again."
+  echo "Failed to load nvm. Please ensure it is installed correctly."
   exit 1
 fi
 
@@ -55,5 +62,3 @@ echo "Installing dependencies..."
 npm install || { echo "Failed to install dependencies"; exit 1; }
 
 echo "Setup complete!"
-npm start run
-
