@@ -43,9 +43,12 @@ cd rustplusplus || { echo "Failed to navigate to repository"; exit 1; }
 
 # Ask for bot details
 echo "Configuring the bot..."
-bot_name=$(prompt_user "Enter the bot name")
-client_id=$(prompt_user "Enter the bot client ID")
-bot_token=$(prompt_user "Enter the bot token")
+echo "Enter the Bot name"
+bot_name=$(prompt_user)
+echo "Enter the bot Application ID"
+client_id=$(prompt_user)
+echo "Enter the bot token"
+bot_token=$(prompt_user)
 
 # Update the configuration file
 config_file="config/index.js"
