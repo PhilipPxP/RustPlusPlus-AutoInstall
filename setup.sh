@@ -1,10 +1,11 @@
 #!/bin/bash
 
-# Function to get user input with a prompt
+# Function to safely prompt the user
 prompt_user() {
   local prompt="$1"
   local input
-  read -p "$prompt: " input
+  echo -n "$prompt: "
+  read input
   echo "$input"
 }
 
@@ -19,14 +20,14 @@ fi
 # Load nvm into the shell
 export NVM_DIR="$HOME/.nvm"
 if [ -s "$NVM_DIR/nvm.sh" ]; then
-  . "$NVM_DIR/nvm.sh"  # Load nvm
+  source "$NVM_DIR/nvm.sh"  # Load nvm
 else
   echo "Failed to load nvm. Please ensure it is installed correctly."
   exit 1
 fi
 
 if [ -s "$NVM_DIR/bash_completion" ]; then
-  . "$NVM_DIR/bash_completion"  # Load nvm bash_completion
+  source "$NVM_DIR/bash_completion"  # Load nvm bash_completion
 fi
 
 # Install Node.js
@@ -41,6 +42,7 @@ git clone https://github.com/alexemanuelol/rustplusplus.git || { echo "Failed to
 cd rustplusplus || { echo "Failed to navigate to repository"; exit 1; }
 
 # Ask for bot details
+echo "Configuring the bot..."
 bot_name=$(prompt_user "Enter the bot name")
 client_id=$(prompt_user "Enter the bot client ID")
 bot_token=$(prompt_user "Enter the bot token")
@@ -50,7 +52,7 @@ config_file="config/index.js"
 if [[ -f $config_file ]]; then
   echo "Updating configuration file..."
 
-  # Use awk to safely update specific lines
+  # Safely update specific lines with awk
   awk -v bot_name="$bot_name" -v client_id="$client_id" -v bot_token="$bot_token" '
     BEGIN { updated_username=0; updated_clientid=0; updated_token=0 }
     /username: process.env.RPP_DISCORD_USERNAME/ {
@@ -87,4 +89,3 @@ echo "Installing dependencies..."
 npm install || { echo "Failed to install dependencies"; exit 1; }
 
 echo "Setup complete!"
-npm start run
