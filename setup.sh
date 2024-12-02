@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Function to safely prompt the user
 prompt_user() {
   local prompt="$1"
@@ -13,8 +15,6 @@ prompt_user() {
 if [ ! -d "$HOME/.nvm" ]; then
   echo "nvm not found. Installing nvm..."
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
-else
-  echo "nvm is already installed."
 fi
 
 # Load nvm into the shell
@@ -89,3 +89,4 @@ echo "Installing dependencies..."
 npm install || { echo "Failed to install dependencies"; exit 1; }
 
 echo "Setup complete!"
+npm start run
