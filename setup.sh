@@ -6,7 +6,7 @@ set -e
 prompt_user() {
   local prompt="$1"
   local input
-  echo -n "$prompt: "
+  echo -n "$prompt"
   read input
   echo "$input"
 }
