@@ -92,4 +92,3 @@ echo "Installing dependencies..."
 npm install || { echo "Failed to install dependencies"; exit 1; }
 
 echo "Setup complete!"
-npm start run
