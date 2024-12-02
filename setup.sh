@@ -30,7 +30,7 @@ cd rustplusplus || exit
 
 # Ask for bot details
 bot_name=$(prompt_user "Enter the bot name: ")
-client_id=$(prompt_user "Enter the bot client ID: ")
+client_id=$(prompt_user "Enter the bot client ID(Application ID): ")
 bot_token=$(prompt_user "Enter the bot token: ")
 
 # Update the configuration file
