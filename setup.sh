@@ -8,6 +8,7 @@ prompt_user() {
   echo "$result"
 }
 
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 # Ensure nvm is loaded
 export NVM_DIR="$HOME/.nvm"
 if [ -s "$NVM_DIR/nvm.sh" ]; then
