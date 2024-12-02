@@ -3,9 +3,9 @@
 # Function to get user input with a prompt
 prompt_user() {
   local prompt="$1"
-  local result
-  read -p "$prompt" result
-  echo "$result"
+  local input
+  read -p "$prompt: " input
+  echo "$input"
 }
 
 # Install nvm if not already installed
@@ -41,16 +41,16 @@ git clone https://github.com/alexemanuelol/rustplusplus.git || { echo "Failed to
 cd rustplusplus || { echo "Failed to navigate to repository"; exit 1; }
 
 # Ask for bot details
-bot_name=$(prompt_user "Enter the bot name: ")
-client_id=$(prompt_user "Enter the bot client ID: ")
-bot_token=$(prompt_user "Enter the bot token: ")
+bot_name=$(prompt_user "Enter the bot name")
+client_id=$(prompt_user "Enter the bot client ID")
+bot_token=$(prompt_user "Enter the bot token")
 
 # Update the configuration file
 config_file="config/index.js"
 if [[ -f $config_file ]]; then
   echo "Updating configuration file..."
-  
-  # Use awk to safely update specific lines without breaking syntax
+
+  # Use awk to safely update specific lines
   awk -v bot_name="$bot_name" -v client_id="$client_id" -v bot_token="$bot_token" '
     BEGIN { updated_username=0; updated_clientid=0; updated_token=0 }
     /username: process.env.RPP_DISCORD_USERNAME/ {
