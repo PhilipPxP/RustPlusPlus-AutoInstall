@@ -11,7 +11,11 @@ bash <(curl -s https://raw.githubusercontent.com/PhilipPxP/RustPlusPlus-AutoInst
 ```
 The script will guide you through the setup process by prompting for the following information:
 
-Bot Name
-Application ID
-Bot Token
+
 After providing the required information, the script will handle the installation and configuration automatically.
+
+Required Informations
+
+- Bot Name
+- Application ID
+- Bot Token
